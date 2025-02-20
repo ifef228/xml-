@@ -84,6 +84,12 @@
     align-items:end;
 }
 
+.main {
+    width: 1000px;
+    margin: auto auto;
+    margin-top: 25%;
+}
+
 
 
 
