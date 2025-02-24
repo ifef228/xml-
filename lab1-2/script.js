@@ -5,6 +5,8 @@ window.onload = function() {
     let expressionResult = ''
     let selectedOperation = null
 
+    let currentTheme = 'white'
+
     //reuslt window
     outputElement = document.getElementById("result")
 
@@ -67,7 +69,61 @@ window.onload = function() {
         } else return
     }
 
+
+    //moon
+    toMoonTheme = function() {
+        document.getElementById('body').style.backgroundColor = 'black'
+
+        let buttons = document.querySelectorAll('[id ^= "btn_digit_"]')
+        buttons.forEach(
+            button => {
+                // button.addEventListener('mouseenter', function() {
+                //     this.style.color = rgb(255, 0, 0)
+                // })
+
+                // button.addEventListener('mouseleave', function() {
+                //     this.style.color = 'white'
+                // })
+
+                button.style.backgroundColor = 'black'
+                button.style.color = 'white'
+
+                
+            }
+        )
+
+
+        document.getElementById('result').style.backgroundColor = 'black'
+        document.getElementById('result').style.color = 'white'
+
+
+        currentTheme = 'black'
+    }
     
+    toDayTheme = function() {
+        document.getElementById('body').style.backgroundColor = 'white'
+        document.querySelectorAll('[id ^= "btn_digit_"]').forEach(
+            button => {
+                button.style.backgroundColor = 'white'
+                button.style.color = 'black'
+            }
+        )
+        document.getElementById('result').style.backgroundColor = 'white'
+        document.getElementById('result').style.color = 'black'
+
+        
+        currentTheme = 'white'
+    }
+
+    document.getElementById('btn_moontheme').onclick = function() {
+        if (currentTheme == 'white') {
+            toMoonTheme()
+        } else {
+            toDayTheme()
+        }
+    }
+
+
     //clear
     document.getElementById("btn_op_clear").onclick = function() { 
         a = ''

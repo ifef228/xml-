@@ -1,5 +1,22 @@
+#body {
+    transition: background-color 0.5s ease; 
+}
+
+.wrapper {
+    width: 60%;
+    min-height: 10%;
+}
+
+.main {
+    margin: auto;
+    width: 280px;
+    height: 65%;
+
+}
+
+
 .my-btn { 
-    margin-right: 5px;           /* задаем отступ от кнопки справа */
+    margin-left: 5px;
     margin-top: 5px;             /* задаем отступ от кнопки сверху*/
     width: 50px;                 /* задаем ширину кнопки */
     height: 50px;                /* задаем высоту кнопки */
@@ -13,6 +30,8 @@
                                     со стрелки на 'указательный палец' */
     user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
     border: 2px solid #fce000;
+
+    transition: background-color 0.5s ease; 
 } 
 
 .my-btn:hover {
@@ -39,6 +58,9 @@
 
 
 .result { 
+    margin-left: 5px;
+    margin-top: 2%;             /* задаем отступ от кнопки сверху*/
+
     width: 220px;
     height: 50px;
     margin-bottom: 15px;         /* отступ снизу */
@@ -50,6 +72,8 @@
     border-radius: 5px;
     border: 2px solid #fce000;
     text-align: right;           /* примагнитим текст к правой стороне */
+
+    transition: background-color 0.5s ease; 
 }
 
 .creator {
@@ -61,7 +85,8 @@
 .btn_moontheme {
     height: 30px;
     width: 30px;
-    margin-bottom: 15px;         
+    margin-bottom: 15px;
+    margin-top: 15px;         
     padding-right: 10px;         
 
     background-image: url(resources/moon.jpg);
@@ -82,12 +107,6 @@
 .flex_form {
     display:inline-block;
     align-items:end;
-}
-
-.main {
-    width: 1000px;
-    margin: auto auto;
-    margin-top: 25%;
 }
 
 
