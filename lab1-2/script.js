@@ -56,6 +56,17 @@ window.onload = function() {
         selectedOperation = '%'
     }
 
+    //set callback to change znak button
+    document.getElementById("btn_op_sign").onclick = function() {
+        if(a != '' && b == '') {
+            a = (-1) * a
+            document.getElementById('result').innerHTML = a
+        } else if (b != '') {
+            b = (-1) * b
+            document.getElementById('result').innerHTML = b
+        } else return
+    }
+
     
     //clear
     document.getElementById("btn_op_clear").onclick = function() { 
