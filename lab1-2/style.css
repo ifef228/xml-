@@ -9,7 +9,7 @@
 
 .main {
     margin: auto;
-    width: 280px;
+    width: 300px;
     height: 65%;
 
 }
@@ -32,7 +32,7 @@
     border: 2px solid #fce000;
 
     transition: background-color 0.5s ease; 
-} 
+}
 
 .my-btn:hover {
     color: rgb(217, 19, 19);
@@ -56,6 +56,18 @@
     border-radius: 10px;   /* подкорректируем округлость */
 }  
 
+.my-btn.clear {
+    background-image: url(resources/backspace.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40px;
+    color: '';
+}
+
+.my-btn.my-btn.clear:hover {
+    color: black;
+    background-image: url(resources/backspaceHover.webp);
+}
 
 .result { 
     margin-left: 5px;
@@ -84,7 +96,7 @@
 
 .btn_moontheme {
     height: 30px;
-    width: 30px;
+    width: 30px; 
     margin-bottom: 15px;
     margin-top: 15px;         
     padding-right: 10px;         
@@ -98,6 +110,7 @@
 
 .btn_moontheme:hover {
     opacity: .8;
+    color: #000000;
 }
 
 .btn_moontheme:active {
@@ -106,7 +119,7 @@
 
 .flex_form {
     display:inline-block;
-    align-items:end;
+    align-items:center;
 }
 
 

@@ -61,12 +61,51 @@ window.onload = function() {
     //set callback to change znak button
     document.getElementById("btn_op_sign").onclick = function() {
         if(a != '' && b == '') {
-            a = (-1) * a
-            document.getElementById('result').innerHTML = a
+            a = ((-1) * a)
+            outputElement.innerHTML = a
         } else if (b != '') {
-            b = (-1) * b
+            b = ((-1) * b)
+            outputElement.innerHTML = b
+        } else return
+    }
+
+    //set callback to all unary ops
+    document.getElementById('btn_op_sqrt').onclick = function() {
+        if(a != '' && b == '') {
+            a = Math.sqrt(a)
+            outputElement.innerHTML = a
+        } else if (b != '') {
+            b = Math.sqrt(b)
             document.getElementById('result').innerHTML = b
         } else return
+    }
+
+    document.getElementById('btn_op_square').onclick = function() {
+        if(a != '' && b == '') {
+            a = Math.pow(a, 2)
+            outputElement.innerHTML = a
+        } else if (b != '') {
+            b = Math.pow(b, 2)
+            document.getElementById('result').innerHTML = b
+        } else return
+    }
+
+    document.getElementById('btn_op_factorial').onclick = function() {
+        if(a != '' && b == '') {
+            a = factorial(a)
+            outputElement.innerHTML = a
+        } else if (b != '') {
+            b = factorial(b)
+            document.getElementById('result').innerHTML = b
+        } else return
+    }
+
+    function factorial(n) {
+        if (n === 0) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
     }
 
 
@@ -131,6 +170,31 @@ window.onload = function() {
         selectedOperation = ''
         expressionResult = ''
         outputElement.innerHTML = 0
+    }
+
+    //backspace
+    document.getElementById("btn_op_backspace").onclick = function() {
+        a = a.toString()
+        b = b.toString()
+        if (b != '') {
+            if (b.length == 1 || (b.charAt(0) == '-' && b.length == 2)) {
+                outputElement.innerHTML = 0;
+                b = ''
+                return
+            }
+            b = b.substring(0, b.length - 1);
+            outputElement.innerHTML = b;
+        } else if (a != '') {
+            if (a.length == 1  || (a.charAt(0) == '-' && a.length == 2)) {
+                outputElement.innerHTML = 0;
+                a = ''
+                return
+            }
+            a = a.substring(0, a.length - 1);
+            outputElement.innerHTML = a;
+        } else {
+            outputElement = 0
+        }
     }
 
     //result
