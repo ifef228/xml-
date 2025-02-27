@@ -1,11 +1,14 @@
 window.onload = function() {
     let a = ''
     let b = ''
+    let saved = '0'
 
     let expressionResult = ''
     let selectedOperation = null
 
     let currentTheme = 'white'
+    
+    let randomEl = Math 
 
     //reuslt window
     outputElement = document.getElementById("result")
@@ -26,7 +29,7 @@ window.onload = function() {
                 outputElement.innerHTML = b
             }
         }
-    }
+    };
 
     // set callbacks to digit buttons
     diditButtons.forEach(button => {
@@ -56,7 +59,7 @@ window.onload = function() {
     document.getElementById("btn_op_percent").onclick = function() { 
         if (a === '') return
         selectedOperation = '%'
-    }
+    };
 
     //set callback to change znak button
     document.getElementById("btn_op_sign").onclick = function() {
@@ -67,7 +70,19 @@ window.onload = function() {
             b = ((-1) * b)
             outputElement.innerHTML = b
         } else return
-    }
+    };
+
+    //set callback to rand
+    document.getElementById('btn_op_rnd').onclick = function() {
+        floor = 1000000000000
+        if (selectedOperation != null) {
+            b = Math.ceil(Math.random() * floor)
+            outputElement.innerHTML = b;
+        } else {
+            a = Math.ceil(Math.random() * floor)
+            outputElement.innerHTML = a;
+        }
+    };
 
     //set callback to all unary ops
     document.getElementById('btn_op_sqrt').onclick = function() {
@@ -78,7 +93,7 @@ window.onload = function() {
             b = Math.sqrt(b)
             document.getElementById('result').innerHTML = b
         } else return
-    }
+    };
 
     document.getElementById('btn_op_square').onclick = function() {
         if(a != '' && b == '') {
@@ -88,7 +103,7 @@ window.onload = function() {
             b = Math.pow(b, 2)
             document.getElementById('result').innerHTML = b
         } else return
-    }
+    };
 
     document.getElementById('btn_op_factorial').onclick = function() {
         if(a != '' && b == '') {
@@ -98,7 +113,7 @@ window.onload = function() {
             b = factorial(b)
             document.getElementById('result').innerHTML = b
         } else return
-    }
+    };
 
     function factorial(n) {
         if (n === 0) {
@@ -106,7 +121,7 @@ window.onload = function() {
         } else {
             return n * factorial(n - 1);
         }
-    }
+    };
 
 
     //moon
@@ -137,7 +152,7 @@ window.onload = function() {
 
 
         currentTheme = 'black'
-    }
+    };
     
     toDayTheme = function() {
         document.getElementById('body').style.backgroundColor = 'white'
@@ -152,7 +167,7 @@ window.onload = function() {
 
         
         currentTheme = 'white'
-    }
+    };
 
     document.getElementById('btn_moontheme').onclick = function() {
         if (currentTheme == 'white') {
@@ -160,7 +175,7 @@ window.onload = function() {
         } else {
             toDayTheme()
         }
-    }
+    };
 
     
     //clear
@@ -170,10 +185,10 @@ window.onload = function() {
         selectedOperation = ''
         expressionResult = ''
         outputElement.innerHTML = 0
-    }
+    };
     document.getElementById("btn_op_clear").onclick = function() { 
         clear()
-    }
+    };
 
     //backspace
     document.getElementById("btn_op_backspace").onclick = function() {
@@ -197,11 +212,11 @@ window.onload = function() {
                 outputElement.innerHTML = a;
             }
         } 
-    }
+    };
 
     //result
     // кнопка расчёта результата
-    document.getElementById("btn_op_equal").onclick = function() { 
+    resultFunc = function() { 
         if (a === '' || b === '' || !selectedOperation)
             return
 
@@ -225,8 +240,23 @@ window.onload = function() {
 
         a = expressionResult.toString()
         b = ''
+        saved = a
         selectedOperation = null
 
         outputElement.innerHTML = a
+    }
+
+    document.getElementById("btn_op_equal").onclick = resultFunc
+};
+
+//set callbacks to mr ops
+document.getElementById('btn_op_mr+') = function() {
+    if (selectedOperation != null) {
+        b = (+1) * b + (+1) * saved
+        resultFunc()
+    } else {
+        b = saved
+        selectedOperation = '+'
+        resultFunc()
     }
 };
