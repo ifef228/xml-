@@ -162,14 +162,17 @@ window.onload = function() {
         }
     }
 
-
+    
     //clear
-    document.getElementById("btn_op_clear").onclick = function() { 
+    clear = function() {
         a = ''
         b = ''
         selectedOperation = ''
         expressionResult = ''
         outputElement.innerHTML = 0
+    }
+    document.getElementById("btn_op_clear").onclick = function() { 
+        clear()
     }
 
     //backspace
@@ -180,21 +183,20 @@ window.onload = function() {
             if (b.length == 1 || (b.charAt(0) == '-' && b.length == 2)) {
                 outputElement.innerHTML = 0;
                 b = ''
-                return
+            } else {
+                b = b.substring(0, b.length - 1);
+                outputElement.innerHTML = b;
             }
-            b = b.substring(0, b.length - 1);
-            outputElement.innerHTML = b;
-        } else if (a != '') {
+            
+        } else if (selectedOperation == null && a != '') {
             if (a.length == 1  || (a.charAt(0) == '-' && a.length == 2)) {
                 outputElement.innerHTML = 0;
                 a = ''
-                return
+            } else {
+                a = a.substring(0, a.length - 1);
+                outputElement.innerHTML = a;
             }
-            a = a.substring(0, a.length - 1);
-            outputElement.innerHTML = a;
-        } else {
-            outputElement = 0
-        }
+        } 
     }
 
     //result
