@@ -247,16 +247,50 @@ window.onload = function() {
     }
 
     document.getElementById("btn_op_equal").onclick = resultFunc
+
+    //set callbacks to mr ops
+    document.getElementById('btn_op_mrplus').onclick = function() {
+        if (selectedOperation != null) {
+            b = (+1) * b + (+1) * saved
+            resultFunc()
+        } else {
+            b = saved
+            selectedOperation = '+'
+            resultFunc()
+        }
+    };
+
+    document.getElementById('btn_op_mr-').onclick = function() {
+        if (selectedOperation != null) {
+            b = (+1) * b - (+1) * saved
+            resultFunc()
+        } else {
+            b = saved
+            selectedOperation = '-'
+            resultFunc()
+        }
+    };
+
+    document.getElementById('btn_op_mr-').onclick = function() {
+        if (b != '') {
+            saved = b
+        } else if (a != '') {
+            saved = a
+        }
+    };
+
+    document.getElementById('btn_op_ms').onclick = function() {
+        saved = outputElement.innerHTML
+    };
+
+    document.getElementById('btn_op_mr').onclick = function() {
+        if (selectedOperation != null) {
+            b = saved
+            outputElement.innerHTML = b
+        } else {
+            a = saved
+            outputElement.innerHTML = a
+        }
+    };
 };
 
-//set callbacks to mr ops
-document.getElementById('btn_op_mr+') = function() {
-    if (selectedOperation != null) {
-        b = (+1) * b + (+1) * saved
-        resultFunc()
-    } else {
-        b = saved
-        selectedOperation = '+'
-        resultFunc()
-    }
-};
