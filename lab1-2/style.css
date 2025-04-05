@@ -1,127 +1,155 @@
-#body {
-    transition: background-color 0.5s ease; 
+:root {
+    --primary-color: #FFDB4D;
+    --secondary-color: #FFE88E;
+    --dark-color: #333;
+    --light-color: #fff;
+    --border-color: #E6E6E6;
+    --text-color: #000;
+    --error-color: #FF3333;
+    --bg-color: #f5f5f5;
+    --calc-bg-color: #fff;
+    --button-bg-color: #fff;
+    --special-button-bg: #f8f8f8;
 }
 
-.wrapper {
-    width: 60%;
-    min-height: 10%;
+.dark-theme {
+    --primary-color: #FFCC00;
+    --secondary-color: #FFDD55;
+    --dark-color: #222;
+    --light-color: #1E1E1E;
+    --border-color: #444;
+    --text-color: #EEE;
+    --error-color: #FF5555;
+    --bg-color: #121212;
+    --calc-bg-color: #1E1E1E;
+    --button-bg-color: #2D2D2D;
+    --special-button-bg: #333;
 }
 
-.main {
-    margin: auto;
-    width: 400px;
-    height: 65%;
-
+body {
+    font-family: 'YS Text', Arial, sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s;
 }
 
-
-.my-btn { 
-    margin-left: 5px;
-    margin-top: 5px;             /* задаем отступ от кнопки сверху*/
-    width: 50px;                 /* задаем ширину кнопки */
-    height: 50px;                /* задаем высоту кнопки */
-    border-radius: 5%;          /* округляем кнопку */
-    border: none;                /* отключаем обводку */
-    background: #ffffff;         /* задаем серый цвет кнопки */
-    color: #000000;                /* задаем белый цвет текста внутри кнопки */
-    font-size: 1.5rem;           /* увеличим размер шрифта */
-    font-family: Arial, Helvetica, sans-serif; /* сменим шрифт */
-    cursor: pointer;             /* при наведении на кнопку курсор будет изменен
-                                    со стрелки на 'указательный палец' */
-    user-select: none;           /* отключаем возможность выделить текст внутри кнопки */
-    border: 2px solid #fce000;
-
-    transition: background-color 0.5s ease; 
+.calculator {
+    width: 320px;
+    background-color: var(--calc-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s;
 }
 
-.my-btn:hover {
-    color: rgb(217, 19, 19);
+.display {
+    padding: 20px;
+    text-align: right;
+    background-color: var(--calc-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s;
 }
 
-.my-btn:active {
-    filter: brightness(130%); /* увеличим интенсивность цвета для эффекта вспышки */
-}
-  /* селектор для кнопок первостепенных операций */
-.my-btn.primary { 
-    background: #fce000; /* цвет кнопки оранжевый */
-}
-  /* селектор для кнопок второстепенных операций */
-.my-btn.secondary { 
-    background: #b0824a; /* цвет кнопки сервый */
-    border: 0px;
+.display input {
+    width: 100%;
+    border: none;
+    font-size: 32px;
+    text-align: right;
+    outline: none;
+    background-color: transparent;
+    color: var(--text-color);
+    transition: color 0.3s;
 }
 
-.my-btn.execute { 
-    width: 110px;          /* сделаем кнопку шире других */
-    border-radius: 10px;   /* подкорректируем округлость */
-}  
-
-.my-btn.clear {
-    background-image: url(resources/backspace.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 40px;
-    color: '';
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--border-color);
+    transition: background-color 0.3s;
 }
 
-.my-btn.my-btn.clear:hover {
-    color: black;
-    background-image: url(resources/backspaceHover.webp);
+button {
+    border: none;
+    padding: 20px;
+    font-size: 18px;
+    background-color: var(--button-bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.result { 
-    margin-left: 5px;
-    margin-top: 2%;             /* задаем отступ от кнопки сверху*/
+button:hover {
+    background-color: var(--special-button-bg);
+}
 
-    width: 220px;
-    height: 50px;
-    margin-bottom: 15px;         /* отступ снизу */
-    padding-right: 10px;         /* выступ справа */
-    background: rgb(255, 255, 255); /* цвет можно задавать и таким образом */
-    color: #000000;              /* цвет текста белый */
-    font-size: 1.5rem;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 5px;
-    border: 2px solid #fce000;
-    text-align: right;           /* примагнитим текст к правой стороне */
+.operator {
+    background-color: var(--primary-color);
+    font-weight: bold;
+    color: #000;
+}
 
-    transition: background-color 0.5s ease; 
+.operator:hover {
+    background-color: var(--secondary-color);
+}
+
+.equals {
+    background-color: var(--primary-color);
+    font-weight: bold;
+    color: #000;
+}
+
+.equals:hover {
+    background-color: var(--secondary-color);
+}
+
+.special {
+    background-color: var(--special-button-bg);
+}
+
+.equation-btn {
+    grid-column: span 2;
+    background-color: #5b9bd5;
+    color: white;
+}
+
+.equation-btn:hover {
+    background-color: #4a8bc7;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--secondary-color);
 }
 
 .creator {
-    margin-top: 10px;
-    font-style: italic;
-    font-size: small;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: all 0.3s;
 }
-
-.btn_moontheme {
-    height: 30px;
-    width: 30px; 
-    margin-bottom: 15px;
-    margin-top: 15px;         
-    padding-right: 10px;         
-
-    background-image: url(resources/moon.jpg);
-    background-size: cover;
-    border: 2px solid #fce000 ;
-
-    align-items: flex-end;
-}
-
-.btn_moontheme:hover {
-    opacity: .8;
-    color: #000000;
-}
-
-.btn_moontheme:active {
-    opacity: .3;
-}
-
-.flex_form {
-    display:inline-block;
-    align-items:center;
-}
-
-
-
-

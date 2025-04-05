@@ -2,44 +2,36 @@ window.onload = function() {
     let a = ''
     let b = ''
     let saved = '0'
-
     let expressionResult = ''
     let selectedOperation = null
-
-    let currentTheme = 'white'
+    let isDarkTheme = false
     
-    let randomEl = Math 
-
-    //reuslt window
-    outputElement = document.getElementById("result")
-
-    //all digit buttons
-    diditButtons = document.querySelectorAll('[id ^= "btn_digit_"]')
-
+    const outputElement = document.getElementById("result")
+    const digitButtons = document.querySelectorAll('[id ^= "btn_digit_"]')
+    const themeButton = document.getElementById("btn_theme")
+    const body = document.body
 
     function onDigitButtonClicked(digit) {
         if (!selectedOperation) {
             if ((digit != '.') || (digit == '.' && !a.includes(digit))) {
                 a += digit
             }
-            outputElement.innerHTML = a
+            outputElement.value = a
         } else {
             if ((digit != '.') || (digit == '.' && !b.includes(digit))) {
                 b += digit
-                outputElement.innerHTML = b
+                outputElement.value = b
             }
         }
-    };
+    }
 
-    // set callbacks to digit buttons
-    diditButtons.forEach(button => {
+    digitButtons.forEach(button => {
         button.onclick = function() {
             const digitValue = button.innerHTML
             onDigitButtonClicked(digitValue)
         }
-    });
+    })
 
-    // set callbacks to ops buttons
     document.getElementById("btn_op_mult").onclick = function() { 
         if (a === '') return
         selectedOperation = 'x'
@@ -59,238 +51,192 @@ window.onload = function() {
     document.getElementById("btn_op_percent").onclick = function() { 
         if (a === '') return
         selectedOperation = '%'
-    };
+    }
 
-    //set callback to change znak button
     document.getElementById("btn_op_sign").onclick = function() {
         if(a != '' && b == '') {
-            a = ((-1) * a)
-            outputElement.innerHTML = a
+            a = (-1 * parseFloat(a)).toString()
+            outputElement.value = a
         } else if (b != '') {
-            b = ((-1) * b)
-            outputElement.innerHTML = b
-        } else return
-    };
-
-    //set callback to rand
-    document.getElementById('btn_op_rnd').onclick = function() {
-        floor = 1000000000000
-        if (selectedOperation != null) {
-            b = Math.ceil(Math.random() * floor)
-            outputElement.innerHTML = b;
-        } else {
-            a = Math.ceil(Math.random() * floor)
-            outputElement.innerHTML = a;
+            b = (-1 * parseFloat(b)).toString()
+            outputElement.value = b
         }
-    };
+    }
 
-    //set callback to all unary ops
+    document.getElementById('btn_op_rnd').onclick = function() {
+        const floor = 1000000000000
+        if (selectedOperation != null) {
+            b = Math.ceil(Math.random() * floor).toString()
+            outputElement.value = b
+        } else {
+            a = Math.ceil(Math.random() * floor).toString()
+            outputElement.value = a
+        }
+    }
+
     document.getElementById('btn_op_sqrt').onclick = function() {
         if(a != '' && b == '') {
-            a = Math.sqrt(a)
-            outputElement.innerHTML = a
+            a = Math.sqrt(parseFloat(a)).toString()
+            outputElement.value = a
         } else if (b != '') {
-            b = Math.sqrt(b)
-            document.getElementById('result').innerHTML = b
-        } else return
-    };
+            b = Math.sqrt(parseFloat(b)).toString()
+            outputElement.value = b
+        }
+    }
 
     document.getElementById('btn_op_square').onclick = function() {
         if(a != '' && b == '') {
-            a = Math.pow(a, 2)
-            outputElement.innerHTML = a
+            a = Math.pow(parseFloat(a), 2).toString()
+            outputElement.value = a
         } else if (b != '') {
-            b = Math.pow(b, 2)
-            document.getElementById('result').innerHTML = b
-        } else return
-    };
+            b = Math.pow(parseFloat(b), 2).toString()
+            outputElement.value = b
+        }
+    }
 
     document.getElementById('btn_op_factorial').onclick = function() {
+        function factorial(n) {
+            if (n === 0) return 1
+            return n * factorial(n - 1)
+        }
+
         if(a != '' && b == '') {
-            a = factorial(a)
-            outputElement.innerHTML = a
+            a = factorial(parseInt(a)).toString()
+            outputElement.value = a
         } else if (b != '') {
-            b = factorial(b)
-            document.getElementById('result').innerHTML = b
-        } else return
-    };
-
-    function factorial(n) {
-        if (n === 0) {
-            return 1;
-        } else {
-            return n * factorial(n - 1);
+            b = factorial(parseInt(b)).toString()
+            outputElement.value = b
         }
-    };
+    }
 
-
-    //moon
-    toMoonTheme = function() {
-        document.getElementById('body').style.backgroundColor = 'black'
-
-        let buttons = document.querySelectorAll('[id ^= "btn_digit_"]')
-        buttons.forEach(
-            button => {
-                // button.addEventListener('mouseenter', function() {
-                //     this.style.color = rgb(255, 0, 0)
-                // })
-
-                // button.addEventListener('mouseleave', function() {
-                //     this.style.color = 'white'
-                // })
-
-                button.style.backgroundColor = 'black'
-                button.style.color = 'white'
-
-                
-            }
-        )
-
-
-        document.getElementById('result').style.backgroundColor = 'black'
-        document.getElementById('result').style.color = 'white'
-
-
-        currentTheme = 'black'
-    };
-    
-    toDayTheme = function() {
-        document.getElementById('body').style.backgroundColor = 'white'
-        document.querySelectorAll('[id ^= "btn_digit_"]').forEach(
-            button => {
-                button.style.backgroundColor = 'white'
-                button.style.color = 'black'
-            }
-        )
-        document.getElementById('result').style.backgroundColor = 'white'
-        document.getElementById('result').style.color = 'black'
-
-        
-        currentTheme = 'white'
-    };
-
-    document.getElementById('btn_moontheme').onclick = function() {
-        if (currentTheme == 'white') {
-            toMoonTheme()
-        } else {
-            toDayTheme()
-        }
-    };
-
-    
-    //clear
-    clear = function() {
+    document.getElementById("btn_op_clear").onclick = function() { 
         a = ''
         b = ''
         selectedOperation = ''
         expressionResult = ''
-        outputElement.innerHTML = 0
-    };
-    document.getElementById("btn_op_clear").onclick = function() { 
-        clear()
-    };
+        outputElement.value = '0'
+    }
 
-    //backspace
     document.getElementById("btn_op_backspace").onclick = function() {
-        a = a.toString()
-        b = b.toString()
         if (b != '') {
             if (b.length == 1 || (b.charAt(0) == '-' && b.length == 2)) {
-                outputElement.innerHTML = 0;
+                outputElement.value = '0'
                 b = ''
             } else {
-                b = b.substring(0, b.length - 1);
-                outputElement.innerHTML = b;
+                b = b.substring(0, b.length - 1)
+                outputElement.value = b
             }
-            
         } else if (selectedOperation == null && a != '') {
-            if (a.length == 1  || (a.charAt(0) == '-' && a.length == 2)) {
-                outputElement.innerHTML = 0;
+            if (a.length == 1 || (a.charAt(0) == '-' && a.length == 2)) {
+                outputElement.value = '0'
                 a = ''
             } else {
-                a = a.substring(0, a.length - 1);
-                outputElement.innerHTML = a;
+                a = a.substring(0, a.length - 1)
+                outputElement.value = a
             }
         } 
-    };
+    }
 
-    //result
-    // кнопка расчёта результата
-    resultFunc = function() { 
-        if (a === '' || b === '' || !selectedOperation)
-            return
+    function resultFunc() { 
+        if (a === '' || b === '' || !selectedOperation) return
 
         switch(selectedOperation) { 
             case 'x':
                 expressionResult = (+a) * (+b)
-                break;
+                break
             case '+':
                 expressionResult = (+a) + (+b)
-                break;
+                break
             case '-':
                 expressionResult = (+a) - (+b)
-                break;
+                break
             case '/':
                 expressionResult = (+a) / (+b)
-                break;
+                break
             case '%':
                 expressionResult = (+a) % (+b)
-                break;
+                break
         }
 
         a = expressionResult.toString()
         b = ''
         saved = a
         selectedOperation = null
-
-        outputElement.innerHTML = a
+        outputElement.value = a
     }
 
     document.getElementById("btn_op_equal").onclick = resultFunc
 
-    //set callbacks to mr ops
     document.getElementById('btn_op_mrplus').onclick = function() {
         if (selectedOperation != null) {
-            b = (+1) * b + (+1) * saved
+            b = (+1) * parseFloat(b) + (+1) * parseFloat(saved)
             resultFunc()
         } else {
             b = saved
             selectedOperation = '+'
             resultFunc()
         }
-    };
+    }
 
-    document.getElementById('btn_op_mr-').onclick = function() {
+    document.getElementById('btn_op_mrminus').onclick = function() {
         if (selectedOperation != null) {
-            b = (+1) * b - (+1) * saved
+            b = (+1) * parseFloat(b) - (+1) * parseFloat(saved)
             resultFunc()
         } else {
             b = saved
             selectedOperation = '-'
             resultFunc()
         }
-    };
-
-    document.getElementById('btn_op_mr-').onclick = function() {
-        if (b != '') {
-            saved = b
-        } else if (a != '') {
-            saved = a
-        }
-    };
+    }
 
     document.getElementById('btn_op_ms').onclick = function() {
-        saved = outputElement.innerHTML
-    };
+        saved = outputElement.value
+    }
 
     document.getElementById('btn_op_mr').onclick = function() {
         if (selectedOperation != null) {
             b = saved
-            outputElement.innerHTML = b
+            outputElement.value = b
         } else {
             a = saved
-            outputElement.innerHTML = a
+            outputElement.value = a
         }
-    };
-};
+    }
 
+    // Функция для решения линейного уравнения kx + b = 0
+    document.getElementById('btn_linear_eq').onclick = function() {
+        if (a === '' || b === '') {
+            alert('Введите коэффициенты k и b (k - первое число, b - второе)')
+            return
+        }
+
+        const k = parseFloat(a)
+        const b_coeff = parseFloat(b)
+        
+        if (k === 0) {
+            if (b_coeff === 0) {
+                outputElement.value = '∞ решений'
+            } else {
+                outputElement.value = 'Нет решений'
+            }
+        } else {
+            const solution = (-b_coeff / k).toString()
+            a = solution
+            b = ''
+            selectedOperation = null
+            outputElement.value = solution
+        }
+    }
+
+    // Переключение темы
+    themeButton.onclick = function() {
+        isDarkTheme = !isDarkTheme
+        if (isDarkTheme) {
+            body.classList.add('dark-theme')
+            themeButton.textContent = '☀️'
+        } else {
+            body.classList.remove('dark-theme')
+            themeButton.textContent = '🌙'
+        }
+    }
+}
