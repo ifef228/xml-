@@ -1,0 +1,3 @@
+[submodule "node-js-project"]
+	path = node-js-project
+	url = https://github.com/ifef228/node-js-project
